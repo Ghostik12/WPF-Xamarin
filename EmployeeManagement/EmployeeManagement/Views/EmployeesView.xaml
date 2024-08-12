@@ -7,9 +7,7 @@
         xmlns:vm="clr-namespace:EmployeeManagement.ViewModels"
         mc:Ignorable="d"
         Title="EmployessView" Height="450" Width="800">
-    <Window.DataContext>
-        <vm:EmployeeViewModel></vm:EmployeeViewModel>
-    </Window.DataContext>
+
     <Grid>
         <ListView PreviewMouseDoubleClick="ListView_PreviewMouseDoubleClick" ItemsSource="{Binding Employees, UpdateSourceTrigger=PropertyChanged}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,40,0,0">
             <ListView.View>
@@ -36,6 +34,7 @@
             </ListView.View>
         </ListView>
         <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,0.503"/>
+        <TextBlock HorizontalAlignment="Left" Margin="171,10,0,0" TextWrapping="Wrap" Text="{Binding FilterMessage}" VerticalAlignment="Top" Width="214"/>
 
     </Grid>
 </Window>

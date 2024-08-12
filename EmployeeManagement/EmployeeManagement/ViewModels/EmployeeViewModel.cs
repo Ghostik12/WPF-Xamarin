@@ -8,22 +8,22 @@ using System.Runtime.CompilerServices;
 
 namespace EmployeeManagement.ViewModels
 {
-    public class EmployeeViewModel : INotifyPropertyChanged
+    public class EmployeeViewModel : INotifyPropertyChanged, IEmployeesViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private IEmployeeRepository _employeeRepository;
 
         protected void OnPropertyChanged([CallerMemberName] string Name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
         }
-        private EmployeeRepository _employeeRepository;
-        private string _filter;
         private ObservableCollection<Employee> _employees;
 
-        public EmployeeViewModel()
+        public EmployeeViewModel(IEmployeeRepository employeeRepository)
         {
-            _employeeRepository = new EmployeeRepository();
+            _employeeRepository = employeeRepository;
             FillListView();
+            FillFilterMessage();
         }
 
         public ObservableCollection<Employee> Employees 
@@ -39,6 +39,7 @@ namespace EmployeeManagement.ViewModels
             }
         }
 
+        private string _filter;
         public string Filter
         {
             get
@@ -49,6 +50,21 @@ namespace EmployeeManagement.ViewModels
             {
                 _filter = value;
                 FillListView();
+                FillFilterMessage();
+            }
+        }
+
+        private string _filterMessage;
+        public string FilterMessage
+        {
+            get
+            {
+                return _filterMessage;
+            }
+            set
+            {
+                _filterMessage = value;
+                OnPropertyChanged();
             }
         }
 
@@ -65,5 +81,16 @@ namespace EmployeeManagement.ViewModels
                   _employeeRepository.GetAll());
         }
 
+        private void FillFilterMessage()
+        {
+            if (!String.IsNullOrEmpty(_filter))
+            {
+                FilterMessage = "По вашему запросу найдено: " + Employees.Count().ToString();
+            }
+            else
+            {
+                FilterMessage = "Введите данные для поиска";
+            }
+        }
     }
 }
