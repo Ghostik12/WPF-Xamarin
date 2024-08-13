@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.Repository;
+﻿using EmployeeManagement.Models;
+using EmployeeManagement.Repository;
 using EmployeeManagement.ViewModels;
 using EmployeeManagement.Views;
 using System;
@@ -23,8 +24,10 @@ namespace EmployeeManagement
 
             IUnityContainer unityContainer = new UnityContainer();
 
+            unityContainer.RegisterType<ILogger, Logger>();
             unityContainer.RegisterType<IEmployeeRepository, EmployeeRepository>();
-            unityContainer.RegisterType<IEmployeesViewModel, EmployeeViewModel>();
+            unityContainer.RegisterType<IEmployeesViewModel, EmployeesViewModel>();
+            unityContainer.RegisterType<IEmployeeViewModel, EmployeeViewModel>();
 
             unityContainer.Resolve<EmployessView>().Show();
         }
