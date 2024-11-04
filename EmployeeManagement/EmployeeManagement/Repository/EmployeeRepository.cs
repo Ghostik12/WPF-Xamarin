@@ -46,6 +46,28 @@ namespace EmployeeManagement.Repository
                   Position = "Программист",
                   CityName = "Москва"
               });
+            _employees.Add(
+                new Employee()
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Максим",
+                    LastName = "Петрович",
+                    Age = 42,
+                    CompanyName = "Океан",
+                    Position = "Программист",
+                    CityName = "Москва"
+                });
+            _employees.Add(
+                new Employee()
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Дмитрий",
+                    LastName = "Петрович",
+                    Age = 42,
+                    CompanyName = "Океан",
+                    Position = "Программист",
+                    CityName = "Москва"
+                });
         }
 
         public IEnumerable<Employee> GetAll() => _employees;
